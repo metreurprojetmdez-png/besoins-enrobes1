@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>body{margin:0;font-family:system-ui,sans-serif;font-size:14px}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Besoins Enrobés GB & BB</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+</head><body>
+<style>
+/* Layout : fiche de chantier — en-tête, deux fiches couche (GB / BB) côte à côte, récapitulatif commande en bas */
+:root{
+  --bg:#eef0ee; --panel:#ffffff; --ink:#1d2321; --muted:#5d6763; --line:#d3d8d5;
+  --accent:#b07a00; --accent-soft:#f6ecd2; --asphalt:#2a2f2d; --ok:#2f7d4f; --bad:#b3392f;
+  --f-disp:"Barlow Condensed","Arial Narrow",sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#191c1b; --panel:#222725; --ink:#e8ebe9; --muted:#9aa39f; --line:#353c39;
+  --accent:#f2c230; --accent-soft:#3a3420; --asphalt:#0f1211; --ok:#5fbf86; --bad:#ef7b70; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#191c1b; --panel:#222725; --ink:#e8ebe9; --muted:#9aa39f; --line:#353c39;
+  --accent:#f2c230; --accent-soft:#3a3420; --asphalt:#0f1211; --ok:#5fbf86; --bad:#ef7b70; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.45}
+.wrap{max-width:1180px;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:20px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;border-bottom:3px solid var(--ink);padding-bottom:12px;position:relative}
+header::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:3px;background:repeating-linear-gradient(90deg,var(--accent) 0 28px,transparent 28px 48px)}
+h1{font-family:var(--f-disp);font-weight:700;font-size:clamp(28px,5vw,40px);line-height:1;margin:0;letter-spacing:.01em;text-wrap:balance}
+.sub{color:var(--muted);margin:4px 0 0;font-size:14px}
+.btn{font:600 13px var(--f-body);border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:8px 12px;border-radius:6px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,480px),1fr));gap:20px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:16px;min-width:0}
+.card h2{margin:0;font-family:var(--f-disp);font-size:24px;font-weight:700;display:flex;align-items:center;gap:10px}
+.tag{font:500 12px var(--f-mono);background:var(--asphalt);color:#f2c230;padding:3px 8px;border-radius:4px;letter-spacing:.04em}
+.sec{display:grid;gap:8px}
+.lab{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.f{display:grid;gap:4px;min-width:0}
+.f label{font-size:13px;color:var(--muted)}
+.f .in{display:flex;align-items:center;border:1px solid var(--line);border-radius:6px;background:var(--bg);overflow:hidden}
+.f input{border:0;background:transparent;color:var(--ink);font:500 15px var(--f-mono);padding:8px 8px;width:100%;min-width:0;font-variant-numeric:tabular-nums}
+.f .u{font:12px var(--f-mono);color:var(--muted);padding:0 8px;white-space:nowrap}
+.fr{display:grid;grid-template-columns:repeat(auto-fit,minmax(74px,1fr));gap:8px}
+.sum{font:500 13px var(--f-mono);display:flex;align-items:center;gap:8px}
+.pill{padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600}
+.pill.ok{color:var(--ok);border:1px solid var(--ok)}
+.pill.bad{color:var(--bad);border:1px solid var(--bad)}
+.ton{display:flex;flex-wrap:wrap;gap:6px 18px;background:var(--accent-soft);border-radius:6px;padding:10px 12px;font-size:14px}
+.ton b{font-family:var(--f-mono);font-weight:500}
+.tbl{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:420px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+th:first-child,td:first-child{text-align:left}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:600}
+td{font-family:var(--f-mono)}
+td:first-child{font-family:var(--f-body);font-weight:500}
+tr.tot td{font-weight:600;border-top:2px solid var(--ink);border-bottom:0}
+tr.grp td{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.07em;font-family:var(--f-body);background:var(--bg)}
+.recap h2 .tag{background:var(--accent);color:var(--asphalt)}
+.note{color:var(--muted);font-size:13px;margin:0;max-width:75ch}
+.big{font-family:var(--f-mono);color:var(--accent);font-weight:500}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Besoins en matériaux — enrobés</h1>
+      <p class="sub">Grave bitume et béton bitumineux : granulats, bitume, fuel de centrale et émulsion ECR 65.</p>
+    </div>
+    <button class="btn" id="reset" type="button">Valeurs par défaut</button>
+  </header>
+
+  <div class="layers" id="layers"></div>
+
+  <section class="card recap">
+    <h2><span class="tag">TOTAL</span>Récapitulatif commande</h2>
+    <div class="tbl"><table id="recap"></table></div>
+    <p class="note">Bitume calculé en teneur sur le poids total de l'enrobé. Granulats = tonnage enrobé − bitume, répartis selon la formule. Les pertes s'appliquent aux granulats, au bitume et au fuel. ECR 65 : dosage en émulsion (kg/m²) sur la surface de chaque couche. Le filler d'apport fait partie de la courbe granulaire de la GB. Dope Iterlene dosé en % du poids de bitume, PR Plast S en % du poids d'enrobé (pertes incluses). Volume foisonné des granulats calculé avec la masse volumique apparente saisie.</p>
+  </section>
+</div>
+
+<script>
+const FR=["Filler","0/3","3/8","8/14","8/16","16/20"];
+const FRS={GB:FR,BB:FR.slice(1)};
+const fname=f=>f==="Filler"?"Filler d'apport":"Granulat "+f;
+const DEF={
+  GB:{nom:"Grave bitume",code:"GB 0/20",L:1000,l:7,e:12,d:2.40,tl:4.2,fuel:8,ecr:0.5,pertes:3,mva:1.5,
+      p:{"Filler":3,"0/3":32,"3/8":15,"8/14":0,"8/16":25,"16/20":25}},
+  BB:{nom:"Béton bitumineux",code:"BBSG 0/14",L:1000,l:7,e:5,d:2.35,tl:5.5,fuel:8,ecr:0.3,pertes:3,mva:1.5,dope:0.4,prp:0.4,
+      p:{"Filler":0,"0/3":40,"3/8":20,"8/14":40,"8/16":0,"16/20":0}}
+};
+let S;
+try{S=JSON.parse(localStorage.getItem("enrobes-v2"))}catch(e){}
+if(!S||!S.GB||!S.BB)S=structuredClone(DEF);
+const save=()=>{try{localStorage.setItem("enrobes-v2",JSON.stringify(S))}catch(e){}};
+const n=(v,dec=2)=>Number.isFinite(v)?v.toLocaleString("fr-FR",{minimumFractionDigits:dec,maximumFractionDigits:dec}):"–";
+
+function field(k,key,label,unit,step){
+  return `<div class="f"><label for="${k}-${key}">${label}</label><div class="in"><input id="${k}-${key}" data-k="${k}" data-f="${key}" type="number" inputmode="decimal" step="${step}" min="0" value="${S[k][key]}"><span class="u">${unit}</span></div></div>`;
+}
+function build(){
+  document.getElementById("layers").innerHTML=["GB","BB"].map(k=>{
+    const c=S[k];
+    return `<section class="card">
+      <h2><span class="tag">${k}</span>${c.nom}</h2>
+      <div class="sec"><span class="lab">Géométrie et densité</span><div class="grid">
+        ${field(k,"L","Longueur","m",1)}${field(k,"l","Largeur","m",0.1)}${field(k,"e","Épaisseur","cm",0.5)}${field(k,"d","Densité en place","t/m³",0.01)}
+      </div></div>
+      <div class="sec"><span class="lab">Formulation</span><div class="grid">
+        ${field(k,"tl","Teneur en bitume","%",0.1)}${field(k,"fuel","Fuel centrale","L/t",0.5)}${field(k,"ecr","ECR 65 accrochage","kg/m²",0.05)}${field(k,"pertes","Pertes","%",0.5)}${field(k,"mva","MVA granulats","t/m³",0.05)}
+      </div></div>
+      ${k==="BB"?`<div class="sec"><span class="lab">Dope et additif</span><div class="grid">
+        ${field(k,"dope","Dope Iterlene","% bitume",0.05)}${field(k,"prp","PR Plast S","% enrobé",0.05)}
+      </div></div>`:""}
+      <div class="sec"><span class="lab">Courbe granulaire (% des granulats)</span>
+        <div class="fr">${FRS[k].map(f=>`<div class="f"><label for="${k}-p-${f}">${f}</label><div class="in"><input id="${k}-p-${f}" data-k="${k}" data-p="${f}" type="number" inputmode="decimal" step="1" min="0" max="100" value="${c.p[f]}"><span class="u">%</span></div></div>`).join("")}</div>
+        <div class="sum" id="${k}-sum"></div>
+      </div>
+      <div class="ton" id="${k}-ton"></div>
+      <div class="tbl"><table id="${k}-tbl"></table></div>
+    </section>`}).join("");
+  document.querySelectorAll("#layers input").forEach(i=>i.addEventListener("input",e=>{
+    const t=e.target,v=parseFloat(t.value.replace(",","."));const k=t.dataset.k;
+    if(t.dataset.p)S[k].p[t.dataset.p]=Number.isFinite(v)?v:0;else S[k][t.dataset.f]=Number.isFinite(v)?v:0;
+    save();calc();
+  }));
+  calc();
+}
+function compute(c){
+  const surf=c.L*c.l, vol=surf*c.e/100, mix=vol*c.d, k=1+c.pertes/100;
+  const bit=mix*c.tl/100*k, gran=mix*(1-c.tl/100)*k;
+  const sumP=FRS[c===S.GB?"GB":"BB"].reduce((a,f)=>a+(+c.p[f]||0),0);
+  const fr={};FR.forEach(f=>{const on=FRS[c===S.GB?"GB":"BB"].includes(f);const t=on&&sumP?gran*(c.p[f]||0)/sumP:0;fr[f]={t,m3:c.mva?t/c.mva:0}});
+  const dope=bit*(c.dope||0)/100*1000, prp=mix*(c.prp||0)/100*k*1000;
+  return {surf,vol,mix,bit,gran,fr,sumP,fuel:mix*c.fuel*k,ecr:surf*c.ecr/1000,dope,prp};
+}
+function rows(r,mva,k){
+  const fl=FR.filter(f=>r.fr[f].t>0);
+  return `<thead><tr><th>Matériau</th><th>Tonnes</th><th>m³ foisonné</th></tr></thead><tbody>
+  ${fl.map(f=>`<tr><td>${fname(f)}</td><td>${n(r.fr[f].t,1)}</td><td>${f==="Filler"?"–":n(r.fr[f].m3,1)}</td></tr>`).join("")}
+  <tr class="tot"><td>Total granulats</td><td>${n(r.gran,1)}</td><td>${n(mva?(r.gran-r.fr.Filler.t)/mva:0,1)}</td></tr>
+  <tr><td>Bitume</td><td>${n(r.bit,2)}</td><td>–</td></tr>
+  ${k==="BB"?`<tr><td>Dope Iterlene</td><td colspan="2">${n(r.dope,0)} kg</td></tr><tr><td>PR Plast S</td><td colspan="2">${n(r.prp,0)} kg</td></tr>`:""}
+  <tr><td>Fuel (centrale)</td><td colspan="2">${n(r.fuel,0)} L</td></tr>
+  <tr><td>ECR 65</td><td>${n(r.ecr,2)}</td><td>–</td></tr></tbody>`;
+}
+function calc(){
+  const R={};
+  ["GB","BB"].forEach(k=>{
+    const c=S[k],r=compute(c);R[k]=r;
+    const okP=Math.abs(r.sumP-100)<0.01;
+    document.getElementById(k+"-sum").innerHTML=`Somme : ${n(r.sumP,0)} % <span class="pill ${okP?"ok":"bad"}">${okP?"Formule complète":"Doit faire 100 %"}</span>`;
+    document.getElementById(k+"-ton").innerHTML=`<span>Surface <b>${n(r.surf,0)} m²</b></span><span>Volume <b>${n(r.vol,1)} m³</b></span><span>Enrobé <b class="big">${n(r.mix,1)} t</b></span>`;
+    document.getElementById(k+"-tbl").innerHTML=rows(r,c.mva,k);
+  });
+  const g=R.GB,b=R.BB;
+  const line=(lab,a,c,dec,u="")=>`<tr><td>${lab}</td><td>${n(a,dec)}${u}</td><td>${n(c,dec)}${u}</td><td>${n(a+c,dec)}${u}</td></tr>`;
+  document.getElementById("recap").innerHTML=`<thead><tr><th>Matériau</th><th>GB</th><th>BB</th><th>Total</th></tr></thead><tbody>
+    <tr class="grp"><td colspan="4">Granulats (t)</td></tr>
+    ${FR.map(f=>line(f==="Filler"?"Filler d'apport":f,g.fr[f].t,b.fr[f].t,1)).join("")}
+    <tr class="tot"><td>Total granulats (t)</td><td>${n(g.gran,1)}</td><td>${n(b.gran,1)}</td><td>${n(g.gran+b.gran,1)}</td></tr>
+    <tr class="grp"><td colspan="4">Liants et énergie</td></tr>
+    ${line("Bitume (t)",g.bit,b.bit,2)}
+    ${line("ECR 65 (t)",g.ecr,b.ecr,2)}
+    ${line("Dope Iterlene (kg)",g.dope,b.dope,0)}
+    ${line("PR Plast S (kg)",g.prp,b.prp,0)}
+    ${line("Fuel (L)",g.fuel,b.fuel,0)}
+    <tr class="grp"><td colspan="4">Production</td></tr>
+    ${line("Enrobé à fabriquer (t)",g.mix,b.mix,1)}
+  </tbody>`;
+}
+document.getElementById("reset").addEventListener("click",()=>{S=structuredClone(DEF);save();build()});
+build();
+</script>
+
+</body></html>

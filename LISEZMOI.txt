@@ -1,0 +1,16 @@
+BESOINS ENROBÉS — application Android (GB & BB)
+
+L'application fonctionne hors connexion. Les saisies sont conservées sur le téléphone.
+
+Option 1 — Android Studio (ordinateur)
+  1. Décompresser le dossier, puis Fichier > Ouvrir > EnrobesCalc.
+  2. Attendre la synchronisation Gradle.
+  3. Build > Build APK(s). L'APK est dans app/build/outputs/apk/debug/.
+  4. Copier l'APK sur le téléphone et l'installer (autoriser les sources inconnues).
+
+Option 2 — GitHub (sans rien installer)
+  1. Créer un dépôt GitHub et y envoyer le contenu de ce dossier.
+  2. Onglet Actions > "Construire APK" se lance tout seul.
+  3. À la fin, télécharger l'artefact "BesoinsEnrobes-apk" (zip contenant l'APK).
+
+Pour modifier le calculateur : app/src/main/assets/index.html
